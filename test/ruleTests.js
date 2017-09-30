@@ -28,14 +28,19 @@ describe("Rule", function () {
     describe('Rule Tests', function () {
 
         it('Get Facts List', function () {
-            var aux_fact1 = new Fact("varon", "juan");
-            var aux_fact2 = new Fact("padre", "pepe,juan");
             var rule = new Rule("test", "test", "test");
             var r = rule.get_facts_list("varon(X),padre(Y,X)", {"X": "juan", "Y": "pepe"});
-            assert.equal(r[0].match(aux_fact1), true);
-            assert.equal(r[1].match(aux_fact2), true);
+            assert.equal(r[0], "varon(juan)");
+            assert.equal(r[1], "padre(pepe,juan)");
         });
 
+        it('Zip map ok', function () {
+            var rule = new Rule("test", "test", "test");
+            var l1 = ["X", "Y"];
+            var l2 = ["juan", "pepe"];
+            var map = rule.zip_map(l1, l2);
+            assert.deepEqual(map, {"X": "juan", "Y": "pepe"});
+        });
     });
 
 });

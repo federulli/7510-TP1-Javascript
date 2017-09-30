@@ -46,7 +46,6 @@ var FactRuleCreator = function () {
         return true
     }
 
-    //split(/,(?=[a-z])/)
 };
 
 module.exports = FactRuleCreator;
