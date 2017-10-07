@@ -23,6 +23,18 @@ describe("Interpreter", function () {
         "hijo(X, Y) :- varon(X), padre(Y, X).",
         "hija(X, Y) :- mujer(X), padre(Y, X)."
     ];
+    var number_db = [
+        "add(zero, zero, zero).",
+        "add(zero, one, one).",
+        "add(zero, two, two).",
+        "add(one, zero, one).",
+        "add(one, one, two).",
+        "add(one, two, zero).",
+        "add(two, zero, two).",
+        "add(two, one, zero).",
+        "add(two, two, one).",
+        "subtract(X, Y, Z) :- add(Y, Z, X)."
+    ];
 
     var interpreter = null;
 
@@ -67,6 +79,18 @@ describe("Interpreter", function () {
             assert(interpreter.checkQuery('padre(mario, pepe)') === false);
         });
 
+        it('add(one, one, two) should be true', function () {
+            var interpreter2 = new Interpreter();
+            interpreter2.parseDB(number_db);
+            assert(interpreter2.checkQuery('add(one, one, two)') === true);
+        });
+
+        it('add(two, one, one) should be false', function () {
+            var interpreter2 = new Interpreter();
+            interpreter2.parseDB(number_db);
+            assert(interpreter2.checkQuery('add(two, one, one)') === false);
+        });
+
         // TODO: Add more tests
 
     });
@@ -81,6 +105,16 @@ describe("Interpreter", function () {
         });
         it('hijo(pepe, juan) should be true', function () {
             assert(interpreter.checkQuery('hijo(pepe, juan)'));
+        });
+        it('subtract(one, one, two) should be false', function () {
+            var interpreter2 = new Interpreter();
+            interpreter2.parseDB(number_db);
+            assert(interpreter2.checkQuery('subtract(one, one, two)') === false);
+        });
+        it('subtract(two, one, one) should be true', function () {
+            var interpreter2 = new Interpreter();
+            interpreter2.parseDB(number_db);
+            assert(interpreter2.checkQuery('subtract(two, one, one)') === true);
         });
 
         // TODO: Add more tests

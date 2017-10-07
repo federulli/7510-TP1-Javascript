@@ -20,7 +20,7 @@ var FactRuleCreator = function () {
         try {
             return fact_rule_string.match(/([^\(]*)\(/)[1];
         } catch (e) {
-            throw new Error("Invalid Fact or Rule");
+            throw new Error("Invalid Fact or Rule: " + fact_rule_string);
         }
     };
 
@@ -28,7 +28,7 @@ var FactRuleCreator = function () {
         try {
             return fact_rule_string.match(/\(([^\(]*)\)/)[1];
         } catch (e) {
-            throw new Error("Invalid Fact or Rule");
+            throw new Error("Invalid Fact or Rule: " + fact_rule_string);
         }
     };
 
@@ -36,7 +36,7 @@ var FactRuleCreator = function () {
         try {
             return string_rule.match(":-(.*)")[1]
         } catch (e) {
-            throw new Error("Invalid Rule");
+            throw new Error("Invalid Rule: " + string_rule);
         }
     };
 
